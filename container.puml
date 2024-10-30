@@ -1,0 +1,18 @@
+@startuml ProficienciaContainer
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Container(Azure, "Azure", "Cloud", "Hospedagem e Repositório de Arquivos")
+Container_Boundary(SQLServer, "Banco de Dados - SQL Server") {
+    Container(inglesDB, "Inglês", "SQL Database", "Base de dados para armazenamento de informações em Inglês")
+    Container(espanholDB, "Espanhol", "SQL Database", "Base de dados para armazenamento de informações em Espanhol")
+    Container(francesDB, "Francês", "SQL Database", "Base de dados para armazenamento de informações em Francês")
+}
+
+Container(dotNetApi, ".NET API", "Backend API", "API para gerenciar cadastros, testes e relatórios")
+Container(frontEnd, "Frontend - Angular 14", "Web Application", "Interface para gestores e candidatos interagirem com o sistema")
+
+Rel(frontEnd, dotNetApi, "Interage via API")
+Rel(dotNetApi, SQLServer, "Armazena e recupera dados de candidatos e testes")
+Rel(dotNetApi, Azure, "Hospeda repositório de dados e arquivos")
+
+@enduml

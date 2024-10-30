@@ -1,0 +1,24 @@
+@startuml ProficienciaContext
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(gestor, "Gestor", "Responsável por abordar e gerenciar empresas na plataforma")
+Person(candidato, "Candidato", "Usuário que realiza os testes de proficiência")
+System_Ext(areaNegocio, "Área de Negócio", "Interage com o gestor para fechar negócios")
+System_Ext(sistemaZeus, "Plataforma Zeus - Módulo Company", "Sistema externo para cadastro de empresas")
+System(cadastroCandidatos, "Sistema de Cadastro de Candidatos", "Recebe e processa o CSV com dados dos candidatos")
+System(gestorDashboard, "Dashboard do Gestor", "Permite ao gestor visualizar a situação e relatórios dos candidatos")
+System(emailNotificacao, "Sistema de Notificação por Email", "Envia emails para candidatos com convite de acesso")
+System(candidatoArea, "Área do Candidato", "Permite que o candidato complete seu cadastro e realize os testes")
+System(testeProficiencia, "Sistema de Testes de Proficiência", "Oferece testes de escrita, leitura, audição e conversação")
+
+Rel(gestor, areaNegocio, "Aborda para novos negócios")
+Rel(areaNegocio, gestor, "Confirma fechamento de negócio")
+Rel(gestor, sistemaZeus, "Cadastra empresa no módulo Company")
+Rel(sistemaZeus, cadastroCandidatos, "Envia CSV de candidatos para cadastro")
+Rel(cadastroCandidatos, emailNotificacao, "Envia email de convite para candidatos")
+Rel(candidato, emailNotificacao, "Recebe convite para completar cadastro")
+Rel(candidato, candidatoArea, "Completa cadastro e realiza testes de acordo com o plano")
+Rel(candidatoArea, testeProficiencia, "Realiza testes conforme o plano selecionado")
+Rel(gestor, gestorDashboard, "Visualiza situação dos candidatos e gera relatórios")
+
+@enduml
